@@ -26,9 +26,11 @@ def task_manegment():
                 urget_tasks_count = count_urgent_tasks(tasks)
                 print(f'\ncurrent urgent tasks: {urget_tasks_count}\n')
             case '8':
+                change_task_status(tasks)
+            case '9':
                 task_count, active_count, completed_count, urgent_count = get_daily_report(tasks)
                 print(f'\n tasks today: {task_count}\n active tasks: {active_count}\n completed tasks: {completed_count}\n urgent tasks: {urgent_count}\n')
-            case '9':
+            case '10':
                 exit()
             case _:
                 print('invalid action please try again')
@@ -56,9 +58,8 @@ def show_task_data(tasks):
         try:
             if task['task name'] == task_name:
                 for key,val in task.items():
-                    print(key, val)
-            print('\n')
-            return
+                    print(f'{key}: {val}\n')
+                return
         except KeyError:
             continue
     print(f'no task matches this name: {task_name}')
@@ -96,7 +97,7 @@ def show_tasks_data(tasks):
         return print('\nno tasks found please use create task feature to create tasks\n')
     for task in tasks:
         for key,val in task.items():
-            print(key, val, '\n')
+            print(f'{key}: {val}, \n')
 
 
 def get_daily_report(tasks):
@@ -105,6 +106,25 @@ def get_daily_report(tasks):
     completed_count = count_completed_tasks(tasks)
     urgent_count = count_urgent_tasks(tasks)
     return task_count, active_count, completed_count, urgent_count
+
+
+def change_task_status(tasks):
+    task_name = input('please enter the name of the task you want to change: ')
+    sub_menu()
+    field_to_change = input(f'field: ')
+    fields = ['task name', 'task status', 'priority level']
+    for task in tasks:
+        try:
+            if task['task name'] == task_name and field_to_change in fields:
+                changed_value = input('enter new field value: ')
+                task[field_to_change] = changed_value
+            else: 
+                print('unrecognized field please try again')
+                change_task_status(tasks)
+        except KeyError:
+            continue
+
+
 
 
 
@@ -118,7 +138,15 @@ def menu():
     '5.see number of unfinished taks\n' \
     '6.see number of completed tasks\n' \
     '7.see number of urgent tasks\n' \
-    '8.see full daily report\n' \
-    '9.exit')
+    '8.chnage task status\n' \
+    '9.see full daily report\n' \
+    '10.exit')
+
+
+def sub_menu():
+    return print('please choose field from the fields below\n\n'
+          'task name\n' \
+          'task status\n' \
+          'priority level\n')
 
 task_manegment()
