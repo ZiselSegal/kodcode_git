@@ -33,6 +33,13 @@ def get_guess_limit():
     return int(limit)
 
 
+def update_guess_state(guess,secret_word,guess_state):
+    for i,letter in enumerate(secret_word):
+        if letter == guess:
+            guess_state = guess_state[:i] + letter + guess_state[i + 1:]
+    return guess_state
+
+
 def run_game():
     previous_guesses = ''
     secret_word = get_random_word()
@@ -41,20 +48,18 @@ def run_game():
     guess_state = '-' * len(secret_word)
     while guesses_remaining and guess_state != secret_word:
         if previous_guesses:
-            print(f'previous guesses: {' '.join([letter for letter in previous_guesses])} \n  guesses_remaining:{guesses_remaining} \n progress: {guess_state}')
+            print(f' \n previous guesses: {' '.join([letter for letter in previous_guesses])} \n \n  guesses_remaining:{guesses_remaining} \n \n progress: {guess_state} \n')
         guess = get_valid_guess()
         if guess in previous_guesses:
             print('letter already guessed please try again')
             continue
         elif guess in secret_word:
-            for i,letter in enumerate(secret_word):
-                if letter == guess:
-                    guess_state = guess_state[:i] + letter + guess_state[i + 1:]
+            guess_state = update_guess_state(guess,secret_word,guess_state)
         previous_guesses += guess
         guesses_remaining -= 1
     if guesses_remaining:
-        print(f'congratulations you won!\n the word was: {secret_word} \n number of guesses: {guesses_remaining + len(previous_guesses) - len(previous_guesses)}')
+        print(f' congratulations you won!\n \n the word was: {secret_word} \n \n number of guesses: {guesses_remaining + len(previous_guesses) - guesses_remaining}')
     else:
-        print(f'game over \n the word was{secret_word}')
+        print(f' \n game over \n the word was: {secret_word}')
 
 run_game()
