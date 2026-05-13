@@ -13,7 +13,8 @@ def get_random_word():
         "microscope", "wildlife", "symphony", "platinum", "umbrella", 
         "harvest", "campfire", "clover", "monument", "lighthouse"
     ]
-    return choice(hangman_words)
+    word = choice(hangman_words)
+    return word
 
 
 def get_valid_guess():
@@ -61,5 +62,3 @@ def run_game():
         print(f' congratulations you won!\n \n the word was: {secret_word} \n \n number of guesses: {guesses_remaining + len(previous_guesses) - guesses_remaining}')
     else:
         print(f' \n game over \n the word was: {secret_word}')
-
-run_game()
