@@ -15,7 +15,6 @@ def get_valid_guess():
     return guess.lower()
 
 
-
 def get_guess_limit():
     limit = input('please enter guess limiit: ')
     while not limit.isdigit() or not limit:
@@ -31,7 +30,27 @@ def update_guess_state(guess,secret_word,guess_state):
     return guess_state
 
 
+def start_game_logo():
+    start_message = """
+    =========================
+        WELCOME TO HANGMAN   
+    =========================
+        +---+
+        |   |
+            |
+            |
+            |
+            |
+        =========
+        
+    Good luck! Let's begin...
+    """
+
+    print(start_message)
+
+
 def run_game():
+    start_game_logo()
     previous_guesses = ''
     secret_word = get_random_word()
     print(f'the word length is {len(secret_word)} choose guess limit wisely')
