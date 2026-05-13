@@ -1,18 +1,8 @@
 from random import choice
+from words import words
 
 def get_random_word():
-    hangman_words = [
-        "mountain", "bicycle", "penguin", "elephant", "keyboard", 
-        "sunflower", "rainbow", "thunder", "pyramid", "jupiter", 
-        "pancakes", "volcano", "telescope", "blanket", "whisper", 
-        "country", "library", "diamond", "avocado", "marathon", 
-        "calendar", "dolphin", "journey", "mansion", "orchard", 
-        "glacier", "hammock", "village", "fountain", "horizon", 
-        "lantern", "compass", "sculpture", "notebook", "starlight", 
-        "backpacker", "adventure", "waterfall", "blueprint", "festival", 
-        "microscope", "wildlife", "symphony", "platinum", "umbrella", 
-        "harvest", "campfire", "clover", "monument", "lighthouse"
-    ]
+    hangman_words = words
     word = choice(hangman_words)
     return word
 
