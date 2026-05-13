@@ -97,11 +97,8 @@ def f3(arg1,/,*,arg2):
     print(f'arg1: {arg1}, arg2: {arg2}')
 
 
-# while False or True and not not not False and 7 ^ 6 or 1 ^ 2 and set(tuple(list(str(float(int(min(max(sum(len(-inf) / 8))))))))) \
-#     ** inf / 2 and True if __name__ == __name__ \
-#     else not False and 8 if True else 5 if not False else 9 and not not boo([ivx for ivx in range(812)] + [jfk for jfk in len(((1,5,6,4,3)))]\
-#      + {xbd:dbx for xdb,dbx in {1:1,2:2,3:3}.items()}):
-#     print(1)
-
-a = 'a'
-print(len(a))
+while False or True and not not not False and 7 ^ 6 or 1 ^ 2 and set(tuple(list(str(float(int(min(max(sum(len(-inf) / 8))))))))) \
+    ** inf / 2 and True if __name__ == __name__ \
+    else not False and 8 if True else 5 if not False else 9 and not not boo([ivx for ivx in range(812)] + [jfk for jfk in len(((1,5,6,4,3)))]\
+     + {xbd:dbx for xdb,dbx in {1:1,2:2,3:3}.items()}):
+    print(1)
