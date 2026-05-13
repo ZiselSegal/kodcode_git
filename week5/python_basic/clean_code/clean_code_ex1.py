@@ -148,5 +148,3 @@ def sub_menu():
           'task name\n' \
           'task status\n' \
           'priority level\n')
-
-task_manegment()
