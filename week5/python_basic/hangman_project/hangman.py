@@ -58,7 +58,7 @@ def run_game():
             guess_state = update_guess_state(guess,secret_word,guess_state)
         previous_guesses += guess
         guesses_remaining -= 1
-    if guesses_remaining:
-        print(f' congratulations you won!\n \n the word was: {secret_word} \n \n number of guesses: {guesses_remaining + len(previous_guesses) - guesses_remaining}')
+    if guesses_remaining >= 0:
+        print(f'\n congratulations you won!\n \n the word was: {secret_word} \n \n number of guesses: {guesses_remaining + len(previous_guesses) - guesses_remaining}')
     else:
         print(f' \n game over \n the word was: {secret_word}')
