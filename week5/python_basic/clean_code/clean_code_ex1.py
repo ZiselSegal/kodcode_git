@@ -1,3 +1,6 @@
+COMPLETED_TASKS_VALUES = ['done', 'finished', 'ended', 'completed','accomplished']
+
+
 def task_manegment():
     tasks = []
     while True:
@@ -66,35 +69,18 @@ def show_task_data(tasks):
 
 
 def count_active_tasks(tasks):
-    active_tasks_count = 0
-    completed_tasks_values = ['done', 'finished', 'ended', 'completed','accomplished']
-    for task in tasks:
-        if task['task status'] not in completed_tasks_values:
-            active_tasks_count += 1
-    if active_tasks_count:
-        return active_tasks_count
-    return 'no active tasks available\n'
+    active_tasks_count = sum(1 for task in tasks if tasks['task status'].lower() not in COMPLETED_TASKS_VALUES)
+    return active_tasks_count
 
 def count_completed_tasks(tasks):
-    completed_tasks_count = 0
-    completed_tasks_values = ['done', 'finished', 'ended', 'completed','accomplished']
-    for task in tasks:
-        if task['task status'] in completed_tasks_values:
-            completed_tasks_count += 1
-    if completed_tasks_count:
-        return completed_tasks_count
-    return 'no completed tasks available\n'
+    completed_tasks_count = sum(1 for task in tasks if tasks['task status'].lower() in COMPLETED_TASKS_VALUES)
+    return completed_tasks_count
 
 def count_urgent_tasks(tasks):
-    urgent_tasks_count = 0
     urgent_task_values = ['urgent', 'critical', 'importent']
-    completed_tasks_values = ['done', 'finished', 'ended', 'completed','accomplished']
-    for task in tasks:
-        if task['priority level'] in urgent_task_values and task['task status'] not in completed_tasks_values:
-            urgent_tasks_count += 1
-    if urgent_tasks_count:
-        return urgent_tasks_count
-    return 'no urgent tasks avilable\n'
+    completed_tasks_values = COMPLETED_TASKS_VALUES
+    urgent_tasks_count = sum(1 for task in tasks if task['priority level'] in urgent_task_values and task['task status'] not in completed_tasks_values)
+    return urgent_tasks_count
 
 def show_tasks_data(tasks):
     if not tasks:
@@ -112,24 +98,43 @@ def get_daily_report(tasks):
     return task_count, active_count, completed_count, urgent_count
 
 
+# def change_task_status(tasks):
+#     task_name = input('please enter the name of the task you want to change: ')
+#     sub_menu()
+#     field_to_change = input(f'field: ')
+#     fields = ['task name', 'task status', 'priority level']
+#     flag = False
+#     for task in tasks:
+#         try:
+#             if task['task name'] == task_name and field_to_change in fields:
+#                 changed_value = input('enter new field value: ')
+#                 task[field_to_change] = changed_value
+#                 flag = True
+#         except KeyError:
+#             continue
+#     if flag == False:
+#         print('unrecognized field please try again')
+#         change_task_status(tasks)
+
+
+# more efficient and more agile
 def change_task_status(tasks):
-    task_name = input('please enter the name of the task you want to change: ')
-    sub_menu()
-    field_to_change = input(f'field: ')
-    fields = ['task name', 'task status', 'priority level']
-    flag = False
-    for task in tasks:
-        try:
-            if task['task name'] == task_name and field_to_change in fields:
+    while True:
+        task_name = input('please enter the name of the task you want to change or exit: ')
+        if task_name == 'exit':
+            break
+        task = next((task for task in tasks if task['task name'] == task_name),None)
+        if task:
+            sub_menu()
+            field_to_change = input(f'field: ')
+            if field_to_change in task:
                 changed_value = input('enter new field value: ')
                 task[field_to_change] = changed_value
-                flag = True
-        except KeyError:
-            continue
-    if flag == False:
-        print('unrecognized field please try again')
-        change_task_status(tasks)
-
+                break
+            else:
+                print('invalid field please try again')
+        else:
+            print(f'no task matches this task name: {task_name}\nplease try again')
 
 
 
