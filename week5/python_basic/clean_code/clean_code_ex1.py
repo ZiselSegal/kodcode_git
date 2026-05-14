@@ -1,6 +1,5 @@
 COMPLETED_TASKS_VALUES = ['done', 'finished', 'ended', 'completed','accomplished']
 
-
 def task_manegment():
     tasks = []
     while True:
@@ -34,6 +33,8 @@ def task_manegment():
                 task_count, active_count, completed_count, urgent_count = get_daily_report(tasks)
                 print(f'\n tasks today: {task_count}\n active tasks: {active_count}\n completed tasks: {completed_count}\n urgent tasks: {urgent_count}\n')
             case '10':
+                delete_task(tasks)
+            case '11':
                 exit()
             case _:
                 print('invalid action please try again')
@@ -77,7 +78,7 @@ def count_completed_tasks(tasks):
     return completed_tasks_count
 
 def count_urgent_tasks(tasks):
-    urgent_task_values = ['urgent', 'critical', 'importent']
+    urgent_task_values = ['urgent', 'critical', 'important']
     completed_tasks_values = COMPLETED_TASKS_VALUES
     urgent_tasks_count = sum(1 for task in tasks if task['priority level'] in urgent_task_values and task['task status'].lower() not in completed_tasks_values)
     return urgent_tasks_count
@@ -137,8 +138,19 @@ def change_task_status(tasks):
             print(f'no task matches this task name: {task_name}\nplease try again')
 
 
-
-
+def delete_task(tasks):
+    if tasks:
+        while True:
+            task_name = input('please enter task name or exit: ')
+            if task_name == 'exit':
+                break
+            task = next((task for task in tasks if task['task name'] == task_name),None)
+            if task:
+                tasks.remove(task)
+                print('task removed sucssefuly')
+                break
+            else:
+                print('no task matches this name please try again')
 
 
 def menu():
@@ -152,7 +164,8 @@ def menu():
     '7.see number of urgent tasks\n' \
     '8.chnage task status\n' \
     '9.see full daily report\n' \
-    '10.exit')
+    '10.delete task\n' \
+    '11.exit\n')
 
 
 def sub_menu():

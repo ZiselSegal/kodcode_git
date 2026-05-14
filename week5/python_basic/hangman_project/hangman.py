@@ -1,5 +1,6 @@
 from random import choice
 from words import random_words, programming_terms, architecture_design, nature_words
+from string import ascii_letters
 
 
 def category_menu():
@@ -37,7 +38,7 @@ def get_random_word(hangman_words):
 
 def get_valid_guess():
     guess = input('please enter your guess: ')
-    while len(guess) != 1 or not guess.isalpha():
+    while len(guess) != 1 or guess not in ascii_letters:
         print('invalid format please enter a single letter')
         guess = input('please enter your guess: ')
     return guess.lower().strip()
