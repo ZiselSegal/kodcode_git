@@ -11,24 +11,20 @@ def category_menu():
 
 
 def get_word_category():
-    category_random_words = random_words
-    category_programming_terms = programming_terms
-    category_architecture_design = architecture_design
-    category_nature_words = nature_words
     while True:
         category_menu()
         action = input('enter category number: ')
         match action:
             case '1':
-                return category_random_words
+                return random_words
             case '2':
-                return category_programming_terms
+                return programming_terms
             case '3':
-                return category_architecture_design
+                return architecture_design
             case '4':
-                return category_nature_words
+                return nature_words
             case '5':
-                return choice([category_nature_words,category_programming_terms,category_architecture_design,category_random_words])
+                return choice([random_words,programming_terms,architecture_design,nature_words])
             case _:
                 print('unrecognized action please try again')
 
@@ -61,10 +57,10 @@ def update_guess_state(guess,secret_word,guess_state):
             guess_state = guess_state[:i] + letter + guess_state[i + 1:]
     return guess_state
 
-def calculate_score(guess_state,previous_guesses):
+def calculate_score(guess_state,previous_guesses,secret_word):
     score_per_letter = 5
     count_unguessed_letters = sum(1 for char in guess_state if char == '_')
-    error_penalty = len(previous_guesses)
+    error_penalty = sum(1 for guess in previous_guesses if guess not in secret_word)
     final_score = score_per_letter * (len(guess_state) - count_unguessed_letters) - error_penalty
     return final_score
 
@@ -95,7 +91,7 @@ def run_game():
     secret_word = get_random_word(category)
     print(f'the word length is {len(secret_word)} choose guess limit wisely')
     guesses_remaining = get_guess_limit()
-    guess_state = '-' * len(secret_word)
+    guess_state = '_' * len(secret_word)
     while guesses_remaining and guess_state != secret_word:
         print(f'\nprevious guesses: {' ,'.join([letter for letter in previous_guesses])}\n\nguesses_remaining:{guesses_remaining}\n\nprogress: {guess_state}\n')
         guess = get_valid_guess()
@@ -106,9 +102,9 @@ def run_game():
             guess_state= update_guess_state(guess,secret_word,guess_state)
         else:
             print('incorrect guess')
+            guesses_remaining -= 1
         previous_guesses.add(guess)
-        guesses_remaining -= 1
-    final_score = calculate_score(guess_state, previous_guesses)
+    final_score = calculate_score(guess_state, previous_guesses,secret_word)
     if guess_state == secret_word:
         print(f'\n congratulations you won!\n\n the word was: {secret_word}\n\n number of guesses: {len(previous_guesses)}\n\n score: {final_score}')
     else:
