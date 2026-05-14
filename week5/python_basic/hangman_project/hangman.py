@@ -56,12 +56,17 @@ def get_guess_limit():
 
 
 def update_guess_state(guess,secret_word,guess_state):
-    guess_points = 0
     for i,letter in enumerate(secret_word):
         if letter == guess:
             guess_state = guess_state[:i] + letter + guess_state[i + 1:]
-            guess_points += 5
-    return guess_state,guess_points
+    return guess_state
+
+def calculate_score(guess_state,previous_guesses):
+    score_per_letter = 5
+    count_unguessed_letters = sum(1 for char in guess_state if char == '_')
+    error_penalty = len(previous_guesses)
+    final_score = score_per_letter * (len(guess_state) - count_unguessed_letters) - error_penalty
+    return final_score
 
 
 def start_game_logo():
@@ -99,14 +104,13 @@ def run_game():
             print('letter already guessed please try again')
             continue
         elif guess in secret_word:
-            guess_state, guess_points = update_guess_state(guess,secret_word,guess_state)
-            score += guess_points
+            guess_state= update_guess_state(guess,secret_word,guess_state)
         else:
-            score -= 2.5
             print('incorrect guess')
         previous_guesses.add(guess)
         guesses_remaining -= 1
+    final_score = calculate_score(guess_state, previous_guesses)
     if guess_state == secret_word:
-        print(f'\n congratulations you won!\n\n the word was: {secret_word}\n\n number of guesses: {len(previous_guesses)}\n\n score: {score}')
+        print(f'\n congratulations you won!\n\n the word was: {secret_word}\n\n number of guesses: {len(previous_guesses)}\n\n score: {final_score}')
     else:
-        print(f' \n game over \n the word was: {secret_word}')
+        print(f' \n game over \n the word was: {secret_word}\nscore: {final_score}')
