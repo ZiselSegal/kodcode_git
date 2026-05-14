@@ -90,7 +90,6 @@ def start_game_logo():
 
 def run_game():
     start_game_logo()
-    score = 0
     previous_guesses = set()
     category = get_word_category()
     secret_word = get_random_word(category)
