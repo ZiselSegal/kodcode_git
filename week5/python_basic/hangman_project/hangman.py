@@ -57,7 +57,7 @@ def run_game():
     guesses_remaining = get_guess_limit()
     guess_state = '-' * len(secret_word)
     while guesses_remaining and guess_state != secret_word:
-        print(f' \n previous guesses: {' '.join([letter for letter in previous_guesses])} \n \n  guesses_remaining:{guesses_remaining} \n \n progress: {guess_state} \n')
+        print(f'\nprevious guesses: {' ,'.join([letter for letter in previous_guesses])}\n\nguesses_remaining:{guesses_remaining}\n\nprogress: {guess_state}\n')
         guess = get_valid_guess()
         if guess in previous_guesses:
             print('letter already guessed please try again')
@@ -67,6 +67,6 @@ def run_game():
         previous_guesses.add(guess)
         guesses_remaining -= 1
     if guess_state == secret_word:
-        print(f'\n congratulations you won!\n \n the word was: {secret_word} \n \n number of guesses: {len(previous_guesses)}')
+        print(f'\n congratulations you won!\n \n the word was: {secret_word}\n\n number of guesses: {len(previous_guesses)}')
     else:
         print(f' \n game over \n the word was: {secret_word}')
