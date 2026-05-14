@@ -69,17 +69,17 @@ def show_task_data(tasks):
 
 
 def count_active_tasks(tasks):
-    active_tasks_count = sum(1 for task in tasks if tasks['task status'].lower() not in COMPLETED_TASKS_VALUES)
+    active_tasks_count = sum(1 for task in tasks if task['task status'].lower() not in COMPLETED_TASKS_VALUES)
     return active_tasks_count
 
 def count_completed_tasks(tasks):
-    completed_tasks_count = sum(1 for task in tasks if tasks['task status'].lower() in COMPLETED_TASKS_VALUES)
+    completed_tasks_count = sum(1 for task in tasks if task['task status'].lower() in COMPLETED_TASKS_VALUES)
     return completed_tasks_count
 
 def count_urgent_tasks(tasks):
     urgent_task_values = ['urgent', 'critical', 'importent']
     completed_tasks_values = COMPLETED_TASKS_VALUES
-    urgent_tasks_count = sum(1 for task in tasks if task['priority level'] in urgent_task_values and task['task status'] not in completed_tasks_values)
+    urgent_tasks_count = sum(1 for task in tasks if task['priority level'] in urgent_task_values and task['task status'].lower() not in completed_tasks_values)
     return urgent_tasks_count
 
 def show_tasks_data(tasks):
