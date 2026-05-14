@@ -117,16 +117,19 @@ def change_task_status(tasks):
     sub_menu()
     field_to_change = input(f'field: ')
     fields = ['task name', 'task status', 'priority level']
+    flag = False
     for task in tasks:
         try:
             if task['task name'] == task_name and field_to_change in fields:
                 changed_value = input('enter new field value: ')
                 task[field_to_change] = changed_value
-            else: 
-                print('unrecognized field please try again')
-                change_task_status(tasks)
+                flag = True
         except KeyError:
             continue
+    if flag == False:
+        print('unrecognized field please try again')
+        change_task_status(tasks)
+
 
 
 
