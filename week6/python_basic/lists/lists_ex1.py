@@ -108,8 +108,7 @@ def sort_lists_v2(lst1,lst2):
 
 #8
 def rotate_lst(lst:list,k: int) -> list:
-    if k > len(lst):
-        k -= len(lst)
+    k %= len(lst)
     for times in range(k):
         lst = [lst[-1]] + lst[:-1]
     return lst
