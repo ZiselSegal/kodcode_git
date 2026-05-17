@@ -1,3 +1,5 @@
+#github link - https://github.com/ZiselSegal/kodcode_git/blob/main/week5/python_basic/hangman_project/hangman.py
+
 from random import choice
 from words import random_words, programming_terms, architecture_design, nature_words
 from string import ascii_letters
