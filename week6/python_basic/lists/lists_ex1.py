@@ -58,7 +58,7 @@ def remove_duplicates_v2(arr: list) -> list:
 
 #6
 def find_second_largest(arr: list[int]) -> int:
-    max_num = arr[1:]
+    max_num = arr[1]
     second_largest = None
     for val in arr:
         if val > max_num:
@@ -73,18 +73,13 @@ def find_second_largest(arr: list[int]) -> int:
 def sort_lists(lst1,lst2):
     i = 0
     full_lst = lst1 + lst2
-    if lst1[-1] < lst2[0]:
-        full_lst = lst1 + lst2
-    elif lst1[0] > lst2[-1]:
-        full_lst = lst2 + lst1
-    else:
-        while i < len(full_lst) - 1:
-            if full_lst[i] > full_lst[i + 1]:
-                full_lst[i], full_lst[i + 1] = full_lst[i + 1], full_lst[i]
-                i -= 1
-                continue
-            i += 1
-        return full_lst
+    while i < len(full_lst) - 1:
+        if full_lst[i] > full_lst[i + 1]:
+            full_lst[i], full_lst[i + 1] = full_lst[i + 1], full_lst[i]
+            i -= 1
+            continue
+        i += 1
+    return full_lst
 
 
 #7.2
@@ -99,15 +94,16 @@ def sort_lists_v2(lst1,lst2):
         elif lst1[list1_index] > lst2[list2_index]:
             sorted_merged_lst.append(lst2[list2_index])
             list2_index += 1
-    if list1_index < len(list1_index):
+    if list1_index < len(lst1):
         sorted_merged_lst.extend(lst1[list1_index:])
     else:
         sorted_merged_lst.extend(lst2[list2_index:])
     return sorted_merged_lst
 
 
+
 #8
-def rotate_lst(lst:list,k: int) -> list:
+def rotate_list(lst:list,k: int) -> list:
     k %= len(lst)
     for times in range(k):
         lst = [lst[-1]] + lst[:-1]
@@ -115,7 +111,7 @@ def rotate_lst(lst:list,k: int) -> list:
 
 
 #8.2
-def  rotate_lst_v2(lst:list,k: int) -> list:
+def  rotate_list_v2(lst:list,k: int) -> list:
     k %= len(lst)
     return lst[-k:] + lst[:-k]
 
