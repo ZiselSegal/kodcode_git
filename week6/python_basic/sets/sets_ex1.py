@@ -65,3 +65,12 @@ def find_symetric_diffrences(lst1:list,lst2:list) -> set:
     for dupe in dupes:
         full.discard(dupe)
     return full
+
+
+#10.2
+def find_symetric_diffrences_v2(lst1:list,lst2:list) -> set:
+    lst1 = set(lst1)
+    lst2 = set(lst2)
+    uniques1 = lst1.difference(lst2)
+    uniques2 = lst2.difference(lst1)
+    return uniques1.union(uniques2)
