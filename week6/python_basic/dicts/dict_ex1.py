@@ -64,5 +64,5 @@ def get_most_frequent_value(dct:dict):
     value_counter_dct = {}
     for val in dct.values():
         value_counter_dct[val] = value_counter_dct.get(val,0) + 1
-    return max(value_counter_dct, key=value_counter_dct.get)
+    return max(value_counter_dct, key=value_counter_dct.get)  
     

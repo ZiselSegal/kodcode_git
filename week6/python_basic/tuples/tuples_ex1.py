@@ -113,6 +113,6 @@ def count_occurences(tup:tuple) -> tuple:
 
 
 #10
-def  rotate_tup(tup:tuple,k:int) -> tuple:
+def rotate_tup(tup:tuple,k:int) -> tuple:
     k %= len(tup)
     return tup[-k:] + tup[:-k]
