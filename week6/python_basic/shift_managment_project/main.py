@@ -14,7 +14,8 @@ def menu() -> None:
     
 
 def mangae_soldier_duties() -> None:
-    while True:
+    action = None
+    while action != '7':
         menu()
         action = input('please enter action number: ')
         match action:
@@ -31,7 +32,7 @@ def mangae_soldier_duties() -> None:
             case '6':
                 show_soldiers_details()
             case '7':
-                exit()
+                continue
             case _:
                 print('invalid action please try again')
 

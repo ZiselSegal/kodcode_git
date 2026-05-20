@@ -1,7 +1,8 @@
 from data import soldiers_data
 VALID_STATUSES = {"pending", "completed", "missed"}
 VALID_DAYS = {"sunday", "monday", "tuesday", "wednesday", "thursday"}
-def get_valid_id() -> int:
+
+def get_valid_id() -> int | None:
     id  = input('please enter id or exit: ')
     while id != 'exit' and not id.isdigit():
         print('invalid id please enter numbers only')
@@ -11,14 +12,14 @@ def get_valid_id() -> int:
     return int(id)
 
 
-def get_valid_task_name() -> str:
+def get_valid_task_name() -> str | None:
     task_name  = input('please enter task name or exit: ')
     if task_name == 'exit':
         return
     return task_name
 
 
-def get_valid_status() -> str:
+def get_valid_status() -> str | None:
     status  = input('please enter status or exit: ')
     while status != 'exit' and status not in VALID_STATUSES:
         print(f'invalid status please enter status from the following: {' '.join(VALID_STATUSES)}')
@@ -28,7 +29,7 @@ def get_valid_status() -> str:
     return status
 
 
-def get_valid_day() -> str:
+def get_valid_day() -> str | None:
     day  = input('please enter day or exit: ')
     while day != 'exit' and day not in VALID_DAYS:
         print('invalid day please enter numbers only')
@@ -38,7 +39,7 @@ def get_valid_day() -> str:
     return day
 
 
-def get_valid_name() -> str:
+def get_valid_name() -> str | None:
     name  = input('please enter name or exit: ')
     while name != 'exit' and not name.isalpha():
         print('invalid name please enter name cotaining only letters')
@@ -55,7 +56,7 @@ def check_soldier_existence(id:int) -> bool:
     return False
 
 
-def check_task_existence(id:int,task_name:str) -> bool:
+def check_task_existence(id:int, task_name:str) -> None | tuple:
     for i_soldier, soldier in enumerate(soldiers_data):
         if soldier['id'] == id:
             for i_duty, duty in enumerate(soldier['duties']):

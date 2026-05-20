@@ -1,5 +1,6 @@
 from data import soldiers_data
 from utils import *
+
 def add_solider() -> None:
     name = get_valid_name()
     if not name:

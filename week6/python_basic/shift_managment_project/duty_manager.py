@@ -1,6 +1,6 @@
 from utils import *
 from data import soldiers_data
-from soldier_manager import show_soldiers_details
+
 def add_duty() -> None:
     id = get_valid_id()
     if not id:
