@@ -1,7 +1,5 @@
-from utils import *
 from soldier_manager import *
 from duty_manager import *
-from data import soldiers_data
 
 
 def menu() -> None:
